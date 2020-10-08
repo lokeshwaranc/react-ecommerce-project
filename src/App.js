@@ -10,6 +10,7 @@ import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import {setCurrentUser} from './redux/user/users.action';
+import { Redirect } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -33,7 +34,7 @@ class App extends React.Component {
         });
         
       }
-      setCurrentUser({userAuth});
+      setCurrentUser(userAuth);
     });
   }
 
@@ -49,7 +50,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route path='/shop' component={ShopPage} />
-              <Route path='/signin' component={SignInAndSignUp} />
+              <Route exact path='/signin' render={()=> this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
               <Route path='/contact' />
             </Switch>
           </Router>
@@ -57,10 +58,15 @@ class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 
 });
 
 
-export default connect(null, mapDispatchToProps) (App);
+export default connect(mapStateToProps, mapDispatchToProps) (App);
