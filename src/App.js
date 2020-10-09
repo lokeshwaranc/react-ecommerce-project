@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 
 import './App.css';
@@ -10,7 +11,6 @@ import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import {setCurrentUser} from './redux/user/users.action';
-import { Redirect } from 'react-router-dom';
 
 
 class App extends React.Component {
