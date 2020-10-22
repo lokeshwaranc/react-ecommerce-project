@@ -1,13 +1,13 @@
 import React from 'react';
 
-import './homepage.style.scss';
+import {HomePageContainer} from './homepage.style';
 
 import Directory from '../../components/directory/directory.component.jsx';
 
 export const HomePage = ({history})=>(
-    <div className='homepage'>
+    <HomePageContainer>
        <Directory history={history}/>
-    </div>
+    </HomePageContainer>
 )
 
 export default HomePage;
